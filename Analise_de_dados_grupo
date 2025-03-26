@@ -1,0 +1,62 @@
+
+def estatisticas(ficha_pessoas):
+    pessoas_maior = 0
+    homens_cad = 0
+    mulheres_menores = 0
+
+    for pessoa in ficha_pessoas:
+
+        if pessoa["idade"] > 18: pessoas_maior += 1
+        if pessoa["sexo"] == "M": homens_cad += 1
+        if pessoa["sexo"] == "F" and pessoa["idade"] < 20: mulheres_menores +=1
+    
+    return int(pessoas_maior), int(homens_cad), int(mulheres_menores)
+
+def main():
+    ficha_pessoas = []
+    while True:
+        print("=" * 90)
+        print("1. Casdastrar nova pessoa.")
+        print("2. Encerrar e apresentar estatisticas")
+        print("=" * 90)
+
+        opcao = input("Escolha a opção desejada: ")
+
+        if opcao == "1":
+            nome = input("Digite o nome da pessoa a ser cadastrada: ")
+            idade = int(input("Digite a idade da pessoa a ser cadastrada: "))
+            sexo = input("Digite o sexo da pessoa a ser cadastrada (F/M): ").strip().upper()[0]
+            id = len(ficha_pessoas) + 1
+            ficha_pessoas.append({"nome": nome, "idade": idade, "sexo": sexo})
+            print("Cadastrado com sucesso!")
+
+
+        elif opcao == "2":
+            
+            pessoas_maior, homens_cad, mulheres_menores = estatisticas(ficha_pessoas)
+            
+            print("=" * 90)
+            print("=== Estatisticas ===")
+            print(f"Maiores de 18: {pessoas_maior}")
+            print(f"Quantidade de homens cadastrados: {homens_cad}")
+            print(f"Quantidade de mulheres menores de 20 anos: {mulheres_menores}")
+            print("=" * 90)
+
+            print("=== Pessoas Cadastradas ===")
+            for pessoa in ficha_pessoas:
+                print(f"nome: {pessoa['nome']} | idade: {pessoa['idade']} | sexo: {pessoa['sexo']}")
+            
+            
+            print("Saindo do programa...")
+            break
+            
+
+        else:
+            print("Opção invalida. \nTente novamente!")
+        
+        
+
+
+
+if __name__ == "__main__":
+    main()
